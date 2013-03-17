@@ -1,0 +1,161 @@
+$b-color: #666;//b: base
+$content-width: 990px;
+
+@mixin clearfix-after {
+  zoom: 1;
+  &:after {
+    content: ".";
+    overflow: hidden;
+    display: block;
+    visibility: hidden;
+    height: 0;
+    line-height: 0;
+    font-size: 0;
+    clear: both;
+  }
+}
+@mixin horizontal-center ($w) {
+  width: $w;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*S reset*/
+  html, body, div, span, object, iframe,
+  h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+  abbr, address, cite, code,
+  del, dfn, em, img, ins, kbd, q, samp,
+  small, strong, sub, sup, var,
+  b, i,
+  dl, dt, dd, ol, ul, li,
+  fieldset, form, label, legend,
+  table, caption, tbody, tfoot, thead, tr, th, td,
+  article, aside, canvas, details, figcaption, figure, 
+  footer, header, hgroup, menu, nav, section, summary,
+  time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0 none;
+    outline:0 none;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+  }
+
+  body {
+    line-height:1;
+  }
+
+  article,aside,details,figcaption,figure,
+  footer,header,hgroup,menu,nav,section { 
+    display:block;
+  }
+
+  ul {
+    list-style:none;
+  }
+
+  blockquote, q {
+    quotes:none;
+  }
+
+  blockquote:before, blockquote:after,
+  q:before, q:after {
+    content:'';
+    content:none;
+  }
+  h1, h2, h3 {
+    font-weight: 400;
+  }
+  a {
+    margin:0;
+    padding:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+  }
+
+  mark {
+    font-weight:bold;
+  }
+
+  del {
+    text-decoration: line-through;
+  }
+
+  abbr[title], dfn[title] {
+    border-bottom:1px dotted;
+    cursor:help;
+  }
+
+  table {
+    border-collapse:collapse;
+    border-spacing:0;
+  }
+  input {
+    outline: 0 none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #eee;
+  }
+  input, select {
+    vertical-align: baseline;
+  }
+/*E reset*/
+
+/*S base style*/
+  body {
+    min-width: 980px;
+    color: $b-color;
+    font-family: "Microsoft YaHei", Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+    word-wrap: break-word;
+  }
+  a {
+    text-decoration: none;
+    color: $b-color;
+  }
+  .clearfix {
+    @include clearfix-after;
+  }
+/*E base style*/
+
+
+/*S #header, #footer*/
+#header, #footer {
+  display: none;
+}
+#footer {
+  @include horizontal-center ($content-width);
+}
+.top {
+  @include horizontal-center ($content-width);
+  padding-top: 1px;
+
+  h1 {
+    font-size: 36px;
+  }
+}
+.nav li {
+  float: left;
+  margin-right: 30px;
+  font-size: 22px;
+}
+#ajax-loader {
+  display: none;
+}
+/*E #header, #footer*/
+
+/*S #home*/
+#home {
+  #sidebar {
+    float: right;
+    width: 100px;
+    margin-left: 30px;
+  }
+  #content {
+    overflow: hidden; // BFC
+  }
+}
+/*E #home*/
