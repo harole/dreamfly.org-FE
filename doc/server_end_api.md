@@ -5,6 +5,7 @@
 ## REST入门
 
 HTTP请求的路径为名词，表示要操作的对象或资源。
+
 HTTP请求的类型表示对此对象进行的操作类型，对应关系如下：
 
 - GET: read
@@ -22,7 +23,7 @@ HTTP请求的类型表示对此对象进行的操作类型，对应关系如下�
 
 ## 服务端API简单描述
 
-传输数据的完整结构和描述见本文档
+传输数据的完整结构和描述见本文档稍后部分
 
 ### /api/post
 
@@ -52,28 +53,29 @@ HTTP请求的类型表示对此对象进行的操作类型，对应关系如下�
 postId是文章的唯一标识id
 
 - **GET**: 返回这篇文章
-  - 操作成功则返回
+  如果没有提供任何参数，返回如下完整数据：
 
-    ```JavaScript
-    {
-      id: String
-      title: String
-      time: String
-      author: Object member
-      modifier: [Object member]
-      tag: [String]
-      content: String
-      comment: [Object comment]
-    }
-    ```
-    如果没有提供任何参数，返回以上的完整数据。提供的参数如下：
-    - modifier: 布尔值，表示是否包含修改者数组
-    - authorDescription: 布尔值，表示是否包含作者描述
-    - authorAvatar: 布尔值，表示是否包含作者头像
-    - authorAvatarSize: 正整数，表示作者头像的尺寸，可选的值有 `24, 64, 200`
-    - authorProfile: 布尔值，表示是否包含作者个人主页url数组
-    - commenterAvatar: 布尔值，表示是否包含评论者的头像
-    - commenterAvatarSize: 正整数，表示评论者头像的尺寸，可选的值有 `24, 64`
+  ```JavaScript
+  {
+    id: String
+    title: String
+    time: String
+    author: Object member
+    modifier: [Object member]
+    tag: [String]
+    content: String
+    comment: [Object comment]
+  }
+  ```
+  请求提供的参数如下：
+  - modifier: 布尔值，表示返回中是否包含修改者数组，默认为 `true`
+  - authorDescription: 布尔值，表示返回中是否包含作者描述，默认为 `true`
+  - authorAvatar: 布尔值，表示返回中是否包含作者头像，默认为 `true`
+  - authorAvatarSize: 正整数，表示作者头像的尺寸，可选的值有 `25, 65, 200`，默认为 `65`
+  - authorProfile: 布尔值，表示返回中是否包含作者个人主页url数组，默认为 `true`
+  - commenterAvatar: 布尔值，表示返回中是否包含评论者的头像，默认为 `true`
+  - commenterAvatarSize: 正整数，表示评论者头像的尺寸，可选的值有 `25, 64`，默认为 `64`
+    
 - **PUT**: 更新这篇文章
   - 发送数据
 
@@ -93,7 +95,7 @@ postId是文章的唯一标识id
     String // id
     ```
 - **DELETE**: 删除这篇文章
-  - 操作成功则返回
+  操作成功则返回
 
     ```JavaScript
     String // 文章id
@@ -119,19 +121,24 @@ postId是文章的唯一标识id
   - 操作成功则返回
 
     ```JavaScript
-    String // 评论id
+    {
+      postId: String // 文章id
+      commentId: String // 评论id
+    }
     ```
 
 ### /api/post/:postId/comment/:commentId
 
 - **DELETE**: 删除这篇文章的这条评论
-  - 发送的数据（是否需要？待定）
+  - 发送的数据 **（是否需要？待定）**
+
     ```JavaScript
     {
       email: String // 提供邮箱以辅助验证是否评论者本人
     }
     ```
   - 操作成功则返回
+
     ```JavaScript
     {
       postId: String // 文章id
@@ -141,11 +148,11 @@ postId是文章的唯一标识id
 
 ### /api/posts
 
-- **GET**: 如果没有提供任何参数，返回由所有文章组成数组。可以提供的参数如下：
-  - **page**: 正整数，表示第几页，从1开始
-  - **step**: 正整数，表示每页多少篇文章
+- **GET**: 返回由文章组成的数组。可提供的参数如下：
+  - **page**: 正整数，表示第几页，从1开始，默认为1
+  - **step**: 正整数，表示每页多少篇文章，默认为所有文章的数量
   - **sortField**: 字符串，目前默认值为 `time`
-  - **sortOrder**: 字符串，可选的值有 `ascend, descend`
+  - **sortOrder**: 字符串，可选的值有 `ascend, descend` ，默认为 `descend`
 
 
 
@@ -163,8 +170,8 @@ postId是文章的唯一标识id
   name: String // 成员名
   description: String // 成员描述
   avatar: {
-    size24: String // 长宽均为24px的头像的url
-    size64: String // 长宽均为64px的头像的url
+    size25: String // 长宽均为25px的头像的url
+    size65: String // 长宽均为65px的头像的url
     size200: String // 长宽均为200px的头像的url
   }
   profile: [String] // 个人主页url组成的数组
@@ -194,8 +201,8 @@ postId是文章的唯一标识id
   commenter: {
     name: String // 评论者
     avatar: {
-      size24: String // 长宽均为24px的头像的url
-      size64: String // 长宽均为64px的头像的url
+      size25: String // 长宽均为25px的头像的url
+      size65: String // 长宽均为65px的头像的url
     },
     url: String // 评论者的个人主页
     email: String // 评论者的邮箱，不要包含在返回的数据中
