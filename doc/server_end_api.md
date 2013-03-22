@@ -154,6 +154,10 @@ postId是文章的唯一标识id
   - **sortField**: 字符串，目前默认值为 `time`
   - **sortOrder**: 字符串，可选的值有 `ascend, descend` ，默认为 `descend`
 
+### /api/posts/amount
+
+- **GET**: 返回文章的总数
+
 
 
 
