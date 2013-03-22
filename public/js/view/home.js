@@ -7,47 +7,44 @@ define([
   'text!template/home.html',
   'PostCollection',
   // post module
-  'PostView'
+  'PostView' // subview
 ], function ($, _, Backbone, homeTpl, PostCollection, PostView) {
-  var HomeView, currentPage = 0, PAGE_STEP = 5;
+  var HomeView, postsView, currentPage = 1, PAGE_STEP = 5;
 
   HomeView = Backbone.View.extend({
     initialize: function () {
-      this.template = _.template(tpl);
-      this.collection = new PostCollection;
+      this.template = _.template(homeTpl);
     },
-    getData: function (index, callback) {
-      var options, url;
+    render: function (pageIndex) {
+      var homeView = this;
 
-      options = {
-        success: function (collection) {
-          callback(collection);
+      postsView.collection = new PostCollection;
+      postsView.collection.fetch({
+        data: {
+          page: pageIndex,
+          step: PAGE_STEP,
+        },
+        success: function () {
+          homeView.$.find('#content').html(postsView.render().el);
+          // Todo: append page navigator
         },
         error: function (collection, xhr) {
           console.log('Error: collection fetch ', xhr);
         }
-      };
-      
-      // Override collection's url
-      url = this.collection.url;
-      if (url.charAt(url.length - 1) !== '/') {
-        url += '/';
-      }
-      options.url = url + index + '/' + PAGE_STEP;
-
-      this.collection.fetch(options);
-    },
-    appendPage: function (pageIndex) {
-      var homeView = this;
-      this.getData(pageIndex, function (postCollection) {
-        postCollection.forEach(function (model) {
-          var postView = new PostView;
-          postView.model = model;
-          homeView.$('#content').append(postView.render().el);
-        });
       });
+      return this;
+    },
+    // override default view remove:
+    // 1. remove subview `postsView`
+    // 2. remove itself
+    remove: function () {
+      postsView.remove();
+      Backbone.View.prototype.remove.apply(this);
+      return this;
     }
   });
+
+  postsView = new PostView;
 
   return HomeView;
 });

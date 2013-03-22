@@ -1,4 +1,7 @@
 // PostView
+// Usage:
+// To render one post, add property `model` to view instance
+// To render many post views, add property `collection` instead
 define([
   'jquery',
   'underscore',
@@ -13,21 +16,11 @@ define([
       // delay parse template string to template engin
       this.template = _.template(tpl)
     },
-    defaults: {
-      title: '',
-      url: '',
-      time: '',
-      author: {
-        url: '',
-        name: ''
-      },
-      content: ''
-    },
     render: function () {
-      var model = this.model;
-      if (model) {
-        this.$el.html( this.template(model.toJSON()) );
-      }
+      var data = {
+        posts: (this.model || this.collection).toJSON()
+      };
+      this.$el.html(this.template(data));
       return this;
     }
   });
