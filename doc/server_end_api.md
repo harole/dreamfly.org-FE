@@ -174,7 +174,6 @@ postId是文章的唯一标识id
   name: String // 成员名
   description: String // 成员描述
   avatar: {
-    size25: String // 长宽均为25px的头像的url
     size65: String // 长宽均为65px的头像的url
     size200: String // 长宽均为200px的头像的url
   }
@@ -205,7 +204,6 @@ postId是文章的唯一标识id
   commenter: {
     name: String // 评论者
     avatar: {
-      size25: String // 长宽均为25px的头像的url
       size65: String // 长宽均为65px的头像的url
     },
     url: String // 评论者的个人主页
