@@ -12,8 +12,9 @@ define('Router', [
   AppRouter = Backbone.Router.extend({
     routes: {
       '': 'home',
-      'home': 'home',
-      'home/page:page': 'home'
+      '!/': 'home',
+      '!/home': 'home',
+      '!/home/page:page': 'home'
     },
     initialize: function () {
       var headerView;

@@ -14,13 +14,13 @@ define([
   PostView = Backbone.View.extend({
     initialize: function () {
       // delay parse template string to template engin
-      this.template = _.template(tpl)
+      this.compiled = _.template(tpl)
     },
     render: function () {
       var data = {
         posts: (this.model || this.collection).toJSON()
       };
-      this.$el.html(this.template(data));
+      this.$el.html(this.compiled(data));
       return this;
     }
   });

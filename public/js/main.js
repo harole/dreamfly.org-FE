@@ -23,7 +23,10 @@ requirejs.config({
     // home
     'HomeView': 'view/home',
     'PostCollection': 'collection/post',
-    'PostModel': 'model/post'
+    'PostModel': 'model/post',
+    'HomePageNavModel': 'model/home_page_nav',
+    // page navigator
+    'PageNavView': 'view/page_nav'
   }
 });
 
