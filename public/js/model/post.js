@@ -7,12 +7,22 @@ define([
   var PostModel;
 
   PostModel = Backbone.Model.extend({
-    urlRoot: '/api/posts',
+    urlRoot: '/api/post',
     initialize: function () {
 
     },
     validate: function (attrs) {
       
+    },
+    defaults: {
+      title: '',
+      url: '',
+      time: '',
+      author: {
+        url: '',
+        name: ''
+      },
+      content: ''
     }
   });
 

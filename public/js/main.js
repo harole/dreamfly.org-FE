@@ -17,13 +17,18 @@ requirejs.config({
     'backbone': 'lib/backbone',
     // router
     'Router': 'router',
-    // header
+    // module: header
     'HeaderView': 'view/header',
     'HeaderModel': 'model/header',
-    // home
+    // module: home
     'HomeView': 'view/home',
     'PostCollection': 'collection/post',
-    'PostModel': 'model/post'
+    'PostModel': 'model/post',
+    'HomePageNavModel': 'model/home_page_nav',
+    // module: post
+    'PostView': 'view/post',
+    // module: page navigator
+    'PageNavView': 'view/page_nav'
   }
 });
 
