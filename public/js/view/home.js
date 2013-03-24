@@ -8,7 +8,7 @@ define([
   'PostCollection',
   'PostView', // subview
   'PageNavView' // subview
-], function ($, _, Backbone, homeTpl, PostCollection, PostView) {
+], function ($, _, Backbone, homeTpl, PostCollection, PostView, PageNavView) {
   var HomeView, postsView, currentPage = 1, PAGE_STEP = 5, pageNavView;
 
   HomeView = Backbone.View.extend({
@@ -25,8 +25,9 @@ define([
           step: PAGE_STEP,
         },
         success: function () {
-          var $content = homeView.$.find('#content');
+          var $content = homeView.$el.find('#content');
 
+          console.log(postsView.collection.models);
           $content.html(postsView.render().el);
           
           // append page navigator
@@ -53,6 +54,8 @@ define([
           console.log('Error: collection fetch ', xhr);
         }
       });
+
+      this.$el.html(this.compiled());
       return this;
     },
     // override default view remove:

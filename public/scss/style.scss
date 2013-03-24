@@ -126,7 +126,7 @@ $content-width: 990px;
 #header, #footer {
   display: none;
 }
-#footer {
+#main, #footer {
   @include horizontal-center ($content-width);
 }
 .top {

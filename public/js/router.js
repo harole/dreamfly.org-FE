@@ -7,7 +7,7 @@ define('Router', [
 ], function ($, _, Backbone, HeaderView, HomeView) {
   var AppRouter,
     // current main view
-    currentMainView;
+    currentMainView = {};
 
   AppRouter = Backbone.Router.extend({
     routes: {
@@ -23,14 +23,12 @@ define('Router', [
       this.headerView = headerView;
 
       // cached DOM elements
-      this.elms = {
-        $main: $('#main') // main content container
-      };
+      this.$main = $('#main') // main content container
 
       // common view initialize and display
       headerView.render().$el.fadeIn('slow');
       $('#footer').fadeIn('slow');
-    }
+    },
     home: function (page) {
       // make sure parameter `page` is a number
       page = page || 1;
@@ -44,7 +42,7 @@ define('Router', [
       }
       currentMainView = new HomeView;
 
-      this.$main.html((this.mainView.render(page).el));
+      this.$main.html(currentMainView.render(page).el);
     },
     defaultAction: function () {
       this.navigate('home/', {
