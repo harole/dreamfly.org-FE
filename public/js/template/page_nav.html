@@ -1,0 +1,24 @@
+{%
+  var omitted;
+  if (crt >= 1 && crt <= links.length) {
+    _.forEach(links, function (link, i, links) {
+      var amount = links.length - 1;
+      if (i === crt) {
+        print('<span class="current">' + i + '</span>');
+        omitted = false;
+      } else if (
+        i === 0
+        || i === amount
+        || (Math.abs(i - crt) <= 2 && crt >= 4 && crt <= amount - 3)
+        || (crt <= 3 && i <= 6)
+        || (crt >= amount - 2 && i >= amount - 5)
+      ) {
+        print('<a href="' + link + '" class="index">' + i + '</a>');
+        omitted = false;
+      } else if (!omitted) {
+        print('<span class="omit">...</span>');
+        omitted = true;
+      }
+    });
+  }
+%}
